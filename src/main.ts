@@ -5,7 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+ 
   const config = new DocumentBuilder()
     .setTitle('Mutter Corp API')
     .setDescription('This is Mutter Corporation to access all information')
@@ -18,5 +18,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.useGlobalPipes(new ValidationPipe());
+  await app.listen(3000);
 }
 bootstrap();
