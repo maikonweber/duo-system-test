@@ -13,6 +13,7 @@ import { ConfigService } from '@nestjs/config';
         password: configService.get('DB_PASSWORD'), // Database password
         database: configService.get('DB_NAME'), // Database name
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        migrations: ['migrations/*'],
         synchronize: true, // Auto-create tables based on entities (for development only)
       }),
       inject: [ConfigService],
