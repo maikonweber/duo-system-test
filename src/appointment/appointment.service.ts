@@ -8,29 +8,17 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class AppointmentService {
-  private readonly logger = new Logger()
+  private readonly logger = new Logger();
   constructor(
     @InjectRepository(Appointment)
-    private readonly AppointmentRepository = Repository<Appointment>
-  ) {
-  }
+    private readonly appointmentRepository: Repository<Appointment>
+  ) {}
   create(createAppointmentDto: CreateAppointmentDto) {
-    return 'This action adds a new appointment';
+    const appointment = this.appointmentRepository.create(createAppointmentDto);
+    return this.appointmentRepository.save(appointment);
   }
 
   findAll() {
-    return `This action returns all appointment`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} appointment`;
-  }
-
-  update(id: number, updateAppointmentDto: UpdateAppointmentDto) {
-    return `This action updates a #${id} appointment`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} appointment`;
+    return this.appointmentRepository.find();
   }
 }
