@@ -7,14 +7,13 @@ import { ConfigService } from '@nestjs/config';
     TypeOrmModule.forRootAsync({
       useFactory: async (configService: ConfigService) => ({
         type: 'postgres', // Type of your database
-        host: configService.get('DB_HOST'), // Database host
-        port: configService.get('DB_PORT'), // Database port
-        username: configService.get('DB_USERNAME'), // Database username
+        host: configService.get('DB_HOST'), 
+        port: configService.get('DB_PORT'), 
+        username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'), // Database password
-        database: configService.get('DB_NAME'), // Database name
+        database: configService.get('DB_NAME'), 
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        migrations: ['migrations/*'],
-        synchronize: true, // Auto-create tables based on entities (for development only)
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),
