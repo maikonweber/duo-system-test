@@ -11,4 +11,5 @@ export class User {
   @ApiProperty()
   @Column()
   password: string;
+  constructor() {}
 }

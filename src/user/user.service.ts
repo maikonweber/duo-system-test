@@ -10,18 +10,19 @@ export class UserService {
   private readonly logger = new Logger(UserService.name);
   constructor(
     @InjectRepository(User)
-    private readonly UserRepository = Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {}
   async create(createUserDto: CreateUserDto) {
-    return ''
+    const user = this.userRepository.create(createUserDto);
+    return await this.userRepository.save(user);
   }
 
-  findAll() {
-    return `This action returns all user`;
+  findAll(): Promise<User[]> {
+    return this.userRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: number): Promise<User | undefined> {
+    return this.userRepository.findOne(id);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
