@@ -4,11 +4,11 @@ import { AuthService } from './auth.service';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { UserService } from 'src/user/user.service';
+import { UserModule } from 'src/user/user.module';
 
 @Module({
   imports: [
-    UserService,
+    UserModule,
     ConfigModule.forRoot(),
     PassportModule,
     JwtModule.register({
