@@ -32,6 +32,6 @@ export class UserService {
     });
   }
   async getUserAndPassword(username: any, password: any) {
-    ;
+    return { username: 'Maikon', password: '12345679' };
   }
 }
