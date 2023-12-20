@@ -15,6 +15,9 @@ export class AuthController {
   @Post('login')
   @UseGuards(LocalAuthGuard)
   login() {
+    const username = 'Maikon';
+    const password = '123456789';
+    return this.authService.loginIn(username, password);
     // return this.authService.login();
   }
 }
