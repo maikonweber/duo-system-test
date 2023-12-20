@@ -21,6 +21,7 @@ export class AppointmentController {
     return this.appointmentService.create(createAppointmentDto);
   }
 
+  
   @Get()
   findAll() {
     return this.appointmentService.findAll();

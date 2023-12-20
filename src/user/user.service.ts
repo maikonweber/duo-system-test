@@ -6,6 +6,10 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
+  private readonly users = [{
+    username: "maikon",
+    password: "123456789"
+  }];
   private readonly logger = new Logger(UserService.name);
   constructor(
     @InjectRepository(User)
