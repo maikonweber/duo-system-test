@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,7 +11,7 @@ export class AppointmentService {
   private readonly logger = new Logger();
   constructor(
     @InjectRepository(Appointment)
-    private readonly appointmentRepository: Repository<Appointment>
+    private readonly appointmentRepository: Repository<Appointment>,
   ) {}
   create(createAppointmentDto: CreateAppointmentDto) {
     const appointment = this.appointmentRepository.create(createAppointmentDto);
@@ -21,4 +21,42 @@ export class AppointmentService {
   findAll() {
     return this.appointmentRepository.find();
   }
+
+  async findOne(id: number): Promise<Appointment | undefined> {
+    return await this.appointmentRepository.findOne({ where: { id: id } });
+  }
+
+  async update(
+    id: number,
+    updateAppointmentDto: UpdateAppointmentDto,
+  ): Promise<Appointment> {
+    const appointment = await this.appointmentRepository.findOne({
+      where: { id: id },
+    });
+
+    if (!appointment) {
+      throw new NotFoundException('Appointment not found');
+    }
+
+    if (updateAppointmentDto.timestamp) {
+      appointment.timestamp = new Date(updateAppointmentDto.timestamp);
+    }
+
+    await this.appointmentRepository.save(appointment);
+
+    return appointment;
+  }
+
+  async delete(id: number): Promise<void> {
+    const appointment = await this.appointmentRepository.findOne({
+      where: { id: id },
+    });
+
+    if (!appointment) {
+      throw new NotFoundException('Appointment not found');
+    }
+
+    await this.appointmentRepository.remove(appointment);
+  }
+  
 }
