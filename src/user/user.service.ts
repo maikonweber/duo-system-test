@@ -22,7 +22,7 @@ export class UserService {
 
   async findOneByUsernamePassword(
     username: string,
-    password: string
+    password: string,
   ): Promise<User | undefined> {
     return this.userRepository.findOne({
       where: {
@@ -31,6 +31,7 @@ export class UserService {
       },
     });
   }
-
-  
+  async getUserAndPassword(username: any, password: any) {
+    ;
+  }
 }

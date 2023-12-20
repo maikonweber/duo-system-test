@@ -11,7 +11,10 @@ import { JwtModule } from '@nestjs/jwt';
     UserModule,
     ConfigModule.forRoot(),
     PassportModule,
-    JwtModule.register({ privateKey:process.env.JWT_SECRET, signOptions: { expiresIn: '60s' } }),
+    JwtModule.register({
+      privateKey: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '60s' },
+    }),
   ],
   controllers: [AuthController],
   providers: [AuthService],
