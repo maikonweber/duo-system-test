@@ -13,7 +13,7 @@ import { JwtStrategy } from './Strategy/local.strategy';
     ConfigModule.forRoot(),
     JwtModule.register({
       privateKey: jwtConstants.secret,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '5d' },
     }),
   ],
   controllers: [AuthController],
