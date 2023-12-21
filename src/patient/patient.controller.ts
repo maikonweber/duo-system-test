@@ -18,25 +18,28 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 @ApiTags('Patient')
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
-  @ApiBearerAuth('XYZ')
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createPatientDto: CreatePatientDto) {
     return this.patientService.create(createPatientDto);
   }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.patientService.findAll();
   }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<Patient | undefined> {
     return this.patientService.findOne(id);
   }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
@@ -46,6 +49,7 @@ export class PatientController {
     return this.patientService.update(id, patientDto);
   }
 
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   async delete(@Param() id: number): Promise<void> {
     return this.patientService.delete(id);
