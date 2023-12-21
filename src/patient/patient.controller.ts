@@ -11,31 +11,31 @@ import { PatientService } from './patient.service';
 import { CreatePatientDto } from './dto/create-patient.dto';
 import { Patient } from './entities/patient.entity';
 import { UpdatePatientDto } from './dto/update-patient.dto';
-import { LocalAuthGuard } from 'src/auth/Guards/local.guards';
+import { JwtAuthGuard } from 'src/auth/Guards/local.guards';
 
 @Controller('patient')
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createPatientDto: CreatePatientDto) {
     return this.patientService.create(createPatientDto);
   }
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get()
   findAll() {
     return this.patientService.findAll();
   }
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(@Param('id') id: number): Promise<Patient | undefined> {
     return this.patientService.findOne(id);
   }
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
     @Param('id') id: number,
@@ -44,7 +44,7 @@ export class PatientController {
     return this.patientService.update(id, patientDto);
   }
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(JwtAuthGuard)
   async delete(@Param() id: number): Promise<void> {
     return this.patientService.delete(id);
   }
