@@ -23,7 +23,15 @@ export class AppointmentService {
   }
 
   async findOne(id: number): Promise<Appointment | undefined> {
-    return await this.appointmentRepository.findOne({ where: { id: id } });
+    const appointment = await this.appointmentRepository.findOne({
+      where: { id: id },
+      relations: ['patient'],
+    });
+    if (!appointment) {
+      throw new NotFoundException
+    }
+
+    return appointment;
   }
 
   async update(
@@ -39,7 +47,7 @@ export class AppointmentService {
     }
 
     if (updateAppointmentDto.timestamp) {
-      appointment.timestamp = new Date(updateAppointmentDto.timestamp);
+      appointment.timestamp = updateAppointmentDto.timestamp;
     }
 
     await this.appointmentRepository.save(appointment);
@@ -58,5 +66,4 @@ export class AppointmentService {
 
     await this.appointmentRepository.remove(appointment);
   }
-  
 }
