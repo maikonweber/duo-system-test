@@ -14,8 +14,12 @@ export class AppointmentService {
     private readonly appointmentRepository: Repository<Appointment>,
   ) {}
   create(createAppointmentDto: CreateAppointmentDto) {
-    const appointment = this.appointmentRepository.create(createAppointmentDto);
-    return this.appointmentRepository.save(appointment);
+    try {
+      const appointment = this.appointmentRepository.create(createAppointmentDto);
+      this.appointmentRepository.save(appointment);
+    } catch (error) {
+      throw new NotFoundException('Já existe um agendamento com esses dados.');
+    }
   }
 
   findAll() {
@@ -28,7 +32,7 @@ export class AppointmentService {
       relations: ['patient'],
     });
     if (!appointment) {
-      throw new NotFoundException
+      throw new NotFoundException();
     }
 
     return appointment;
@@ -47,7 +51,10 @@ export class AppointmentService {
     }
 
     if (updateAppointmentDto.timestamp) {
-      appointment.timestamp = updateAppointmentDto.timestamp;
+      appointment.timestamp = new Date(updateAppointmentDto.timestamp);
+    }
+    if (updateAppointmentDto.status) {
+      appointment.status = updateAppointmentDto.status;
     }
 
     await this.appointmentRepository.save(appointment);

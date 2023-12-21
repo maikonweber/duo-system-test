@@ -18,7 +18,7 @@ export class Appointment {
 
   @ApiProperty()
   @Column({ type: 'timestamp' })
-  timestamp: string;
+  timestamp: Date;
 
   @ApiProperty()
   @Column({
