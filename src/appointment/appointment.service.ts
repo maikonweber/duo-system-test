@@ -3,7 +3,6 @@ import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Appointment } from './entities/appointment.entity';
-import { privateDecrypt } from 'crypto';
 import { Repository } from 'typeorm';
 
 @Injectable()

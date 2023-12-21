@@ -24,7 +24,10 @@ export class PatientService {
   }
 
   async findOne(id: number): Promise<Patient | undefined> {
-    return await this.patientRepository.findOne({ where: { id: id } });
+    return await this.patientRepository.findOne({
+      where: { id: id },
+      relations: ['appointments'],
+    });
   }
 
   async update(id: number, patientDto: UpdatePatientDto): Promise<Patient> {
