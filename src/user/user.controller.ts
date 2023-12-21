@@ -15,13 +15,13 @@ import { ApiTags } from '@nestjs/swagger';
 export class UserController {
   constructor(private readonly userService: UserService) {}
   
-  @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
+  // @Post()
+  // async create(@Body() createUserDto: CreateUserDto) {
+  //   return this.userService.create(createUserDto);
+  // }
 
-  @Get()
-  async findAll() {
-    return this.userService.findAll();
-  }
+  // @Get()
+  // async findAll() {
+  //   return this.userService.findAll();
+  // }
 }
