@@ -28,7 +28,7 @@ export class PatientService {
         `Error creating patient: ${error.message}`,
         error.stack,
       );
-      throw new BadRequestException('Failed to create patient');
+      throw new BadRequestException('Falha ao Criar o Paciente');
     }
   }
 
@@ -40,7 +40,7 @@ export class PatientService {
         `Error fetching patients: ${error.message}`,
         error.stack,
       );
-      throw new BadRequestException('Failed to fetch patients');
+      throw new BadRequestException('Falha em Buscar os Pacientes');
     }
   }
 
@@ -55,7 +55,7 @@ export class PatientService {
         `Error fetching patient by ID ${id}: ${error.message}`,
         error.stack,
       );
-      throw new BadRequestException('Failed to fetch patient');
+      throw new BadRequestException('Falha em Buscar o Patient');
     }
   }
 
@@ -66,7 +66,7 @@ export class PatientService {
       });
 
       if (!patient) {
-        throw new NotFoundException('Patient not found');
+        throw new NotFoundException('Patient Não Encontrado');
       }
 
       patient.name = patientDto.name;
@@ -80,10 +80,10 @@ export class PatientService {
       return patient;
     } catch (error) {
       this.logger.error(
-        `Error updating patient ID ${id}: ${error.message}`,
+        `Erro ao Atulizar ${id}: ${error.message}`,
         error.stack,
       );
-      throw new BadRequestException('Failed to update patient');
+      throw new BadRequestException('Falha ao atualizar patient');
     }
   }
 
@@ -94,13 +94,13 @@ export class PatientService {
       });
 
       if (!patient) {
-        throw new NotFoundException('Patient not found');
+        throw new NotFoundException('Patient não encontrado');
       }
 
       await this.patientRepository.remove(patient);
     } catch (error) {
       this.logger.error(
-        `Error deleting patient ID ${id}: ${error.message}`,
+        `Erro ao deletar patient ID ${id}: ${error.message}`,
         error.stack,
       );
       throw new BadRequestException('Failed to delete patient');

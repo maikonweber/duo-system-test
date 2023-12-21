@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  HttpStatus,
 } from '@nestjs/common';
 import { AppointmentService } from './appointment.service';
 import { CreateAppointmentDto } from './dto/create-appointment.dto';
@@ -23,6 +24,7 @@ export class AppointmentController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Post()
+  @HttpStatus()
   create(@Body() createAppointmentDto: CreateAppointmentDto) {
     return this.appointmentService.create(createAppointmentDto);
   }
