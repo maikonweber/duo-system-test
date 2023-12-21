@@ -12,11 +12,13 @@ import { CreatePatientDto } from './dto/create-patient.dto';
 import { Patient } from './entities/patient.entity';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 import { JwtAuthGuard } from 'src/auth/Guards/local.guards';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @Controller('patient')
+@ApiTags('Patient')
 export class PatientController {
   constructor(private readonly patientService: PatientService) {}
-
+  @ApiBearerAuth('XYZ')
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createPatientDto: CreatePatientDto) {

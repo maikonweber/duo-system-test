@@ -13,7 +13,9 @@ import { CreateAppointmentDto } from './dto/create-appointment.dto';
 import { UpdateAppointmentDto } from './dto/update-appointment.dto';
 import { Appointment } from './entities/appointment.entity';
 import { JwtAuthGuard } from 'src/auth/Guards/local.guards';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Appointment')
 @Controller('appointment')
 export class AppointmentController {
   constructor(private readonly appointmentService: AppointmentService) {}
