@@ -24,11 +24,4 @@ export class AuthController {
     return await this.authService.loginIn(username, password);
     // return "Teste Controller"
   }
-
-  @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
-  @Get('test')
-  async test() {
-    return 'teste';
-  }
 }
