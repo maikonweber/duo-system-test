@@ -24,7 +24,6 @@ export class AppointmentController {
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Post()
-  @HttpStatus()
   create(@Body() createAppointmentDto: CreateAppointmentDto) {
     return this.appointmentService.create(createAppointmentDto);
   }
