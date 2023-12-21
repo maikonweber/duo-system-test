@@ -8,8 +8,14 @@ import { AuthGuard } from '@nestjs/passport';
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
   canActivate(context: ExecutionContext) {
+    const request = context.switchToHttp().getRequest();
 
-      
+    // Check the Authorization header for a Bearer token
+    const authHeader = request.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      throw new UnauthorizedException('Invalid or missing Bearer token');
+    }
+
     return super.canActivate(context);
   }
 
